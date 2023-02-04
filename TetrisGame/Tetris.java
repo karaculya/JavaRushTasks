@@ -69,7 +69,6 @@ public class Tetris {
             Thread.sleep(500);  //пауза 300 миллисекунд - 1/3 секунды
         }
 
-        //Выводим сообщение "Game Over"
         System.out.println("Game Over");
     }
 
