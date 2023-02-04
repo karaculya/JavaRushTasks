@@ -7,7 +7,6 @@ public class Field {
     private int width;
     private int height;
 
-    //матрица поля: 1 - клетка занята, 0 - свободна
     private int[][] matrix;
 
     public Field(int width, int height) {
