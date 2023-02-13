@@ -1,4 +1,4 @@
-package com.javarush.task.task25.task2515;
+package com.javarush.task.task19.space_wars;
 
 public abstract class BaseObject {
     //координаты
