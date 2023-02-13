@@ -1,4 +1,4 @@
-package com.javarush.task.task19.Bankomat;
+package com.javarush.task.task19.bankomat;
 
 import java.math.BigDecimal;
 
