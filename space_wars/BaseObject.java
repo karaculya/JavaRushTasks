@@ -32,14 +32,6 @@ public abstract class BaseObject {
         this.y = y;
     }
 
-    public double getRadius() {
-        return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
-
     /**
      * Метод рисует свой объект на "канвасе".
      */
