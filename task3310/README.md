@@ -62,7 +62,7 @@
 <li>5.3. Реализовать в классе все необходимые методы. Реализации методов должны использовать поле data.</li>
 <li>6.1. Создать класс Solution, если ты не сделал это раньше.</li>
 <li>6.2. Добавить в класс Solution реализации вспомогательных статических методов:</li>
-<ul style="list-style-type:none">
+<li style="list-style-type:none">
 <li>6.2.1. Set<Long> getIds(Shortener shortener, Set<String> strings). Этот метод должен для переданного множества строк возвращать множество идентификаторов. Идентификатор для каждой отдельной строки нужно получить, используя shortener.</li>
 <li>6.2.2. Set<String> getStrings(Shortener shortener, Set<Long> keys). Метод будет возвращать множество строк, которое соответствует переданному множеству идентификаторов.
 При реальном использовании Shortener, задача получить из множества строк множество идентификаторов и наоборот скорее всего не встретится, это нужно исключительно для тестирования.</li>
@@ -80,8 +80,54 @@
 В отличии от класса Node из HashMap, мой класс будет поддерживать только интерфейс Serializable и будет называться Entry.</li>
 <li>7.2. Добавить в Entry следующие поля: Long key, String value, Entry next, int hash. Как видишь, наша реализация будет поддерживать только тип Long для ключа и только String для значения. Область видимости полей оставь по умолчанию.</li>
 <li>7.3. Добавить и реализовать конструктор Entry(int hash, Long key, String value, Entry next).</li>
-<li>7.4. Добавь и реализовать методы: Long getKey(), String getValue(), int hashCode(), boolean equals() и String toString(). Реализовывать остальные методы оригинального Entry не нужно, мы пишем упрощенную версию.</li>
-
+<li>7.4. Добавить и реализовать методы: Long getKey(), String getValue(), int hashCode(), boolean equals() и String toString(). Реализовывать остальные методы оригинального Entry не нужно, мы пишем упрощенную версию.</li>
+<li>8.1. Добавить и реализовать класс OurHashMapStorageStrategy, 
+используя класс Entry из предыдущей подзадачи. 
+Класс OurHashMapStorageStrategy должен реализовывать интерфейс 
+StorageStrategy. В классе должны быть следующие поля:</li>
+<ul style="list-style-type:none">
+<li>8.1.1. static final int DEFAULT_INITIAL_CAPACITY = 16;</li>
+<li>8.1.2. static final float DEFAULT_LOAD_FACTOR = 0.75f;</li>
+<li>8.1.3. Entry[] table = new Entry[DEFAULT_INITIAL_CAPACITY];</li>
+<li>8.1.4. int size;</li>
+<li>8.1.5. int threshold = (int) (DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);</li>
+<li>8.1.6. float loadFactor = DEFAULT_LOAD_FACTOR;</li>
+</ul>
+<li>8.2. Реализовать в классе следующие вспомогательные методы:</li>
+<ul style="list-style-type:none">
+<li>8.2.1. int hash(Long k)</li>
+<li>8.2.2. int indexFor(int hash, int length)</li>
+<li>8.2.3. Entry getEntry(Long key)</li>
+<li>8.2.4. void resize(int newCapacity)</li>
+<li>8.2.5. void transfer(Entry[] newTable)</li>
+<li>8.2.6. void addEntry(int hash, Long key, String value, int bucketIndex)</li>
+<li>8.2.7. void createEntry(int hash, Long key, String value, int bucketIndex)</li>
+</ul>
+<li>8.3. Добавить в класс публичные методы, которые требует интерфейс StorageStrategy.</li>
+<li>9.1. Создать класс FileBucket в пакете strategy.</li>
+<li>9.2. Добавить в класс поле Path path (путь к файлу).</li>
+<li>9.3. Добавить в класс конструктор без параметров, он должен:</li>
+<ul style="list-style-type:none">
+<li>9.3.1. Инициализировать path временным файлом. Файл должен быть размещен в директории для временных файлов и иметь случайное имя.</li>
+<li>9.3.2. Создавать новый файл, используя path. Если такой файл уже есть, то заменять его.</li>
+<li>9.3.3. Обеспечивать удаление файла при выходе из программы.</li>
+</ul>
+9.4. Добавить в класс методы:
+<ul style="list-style-type:none">
+<li>9.4.1. public long getFileSize(), он должен возвращать размер файла на который указывает path.</li>
+<li>9.4.2. public void putEntry(Entry entry) - должен сериализовывать переданный entry в файл. Учти, каждый entry может содержать еще один entry.</li>
+<li>9.4.3. public Entry getEntry() - должен забирать entry из файла. Если файл имеет нулевой размер, вернуть null.</li>
+<li>9.4.4.public void remove() - удалять файл на который указывает path.</li>
+</ul>
+<li>10.1. Создать и реализовать класс FileStorageStrategy, реализующий интерфейс StorageStrategy.</li>
+<li>10.2. Использовать FileBucket в качестве ведер (класс должен содержать поле FileBucket[] table).</li>
+<li>10.3. Работать аналогично тому, как это делает OurHashMapStorageStrategy, но удваивать количество ведер не когда количество элементов size станет больше какого-то порога, а когда размер одного из ведер (файлов) стал больше bucketSizeLimit.</li>
+<ul style="list-style-type:none">
+<li>10.3.1. Добавь в класс поле long bucketSizeLimit.</li>
+<li>10.3.2. Проинициализируй его значением по умолчанию, например, 10000 байт.<li>
+<li>10.3.3. Добавь сеттер и геттер для этого поля.</li>
+</ul>
+<li>10.4. При реализации метода resize(int newCapacity) проследи, чтобы уже не нужные файлы были удалены (вызови метод remove()) и проверь новую стратегию в методе main().</li>
 </ul>
 </ul>
 <h3>Достижения:</h3>
